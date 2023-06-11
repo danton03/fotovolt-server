@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Temperatures {
+  id Int @id @default(autoincrement())
+  temperature Float
+  createdAt DateTime @default(now())
+}
