@@ -10,5 +10,5 @@ datasource db {
 model Temperatures {
   id Int @id @default(autoincrement())
   temperature Float
-  createdAt DateTime @default(now())
+  createdAt String
 }
