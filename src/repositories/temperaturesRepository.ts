@@ -1,25 +1,18 @@
+import { Temperatures } from "@prisma/client";
 import { prisma } from "../utils/prisma";
 
-type TtemperatureData = {
-  temperature: number,
-  createdAt: string
-}
+type TtemperatureData = Omit<Temperatures, 'id'>;
 
-async function save({temperature, createdAt}: TtemperatureData) {
+async function save(temperatureData: TtemperatureData) {
   await prisma.temperatures.create({
-    data: {
-      temperature,
-      createdAt
-    }
+    data: temperatureData,
   })
 }
 
 async function getTodays(date: string) {
   const temperatures = await prisma.temperatures.findMany({
     where: {
-      createdAt: {
-        contains: date
-      }
+      day: date
     }
   })
 
@@ -29,9 +22,7 @@ async function getTodays(date: string) {
 async function getMonthTemperatures(month: string) {
   const temperatures = await prisma.temperatures.findMany({
     where: {
-      createdAt: {
-        contains: `/${month}/`
-      }
+      month: month
     }
   })
 

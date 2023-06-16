@@ -8,7 +8,10 @@ datasource db {
 }
 
 model Temperatures {
-  id Int @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   temperature Float
-  createdAt String
+  day         String
+  month       String
+  hour        String
+  year        String
 }

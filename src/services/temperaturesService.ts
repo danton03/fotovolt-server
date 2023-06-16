@@ -5,16 +5,19 @@ import { generateDate } from "../utils/dateGenerator";
 
 async function create(body: RequestBodyDefault) {
   const {temperature} = temperatureSchema.parse(body);
-  const createdAt = generateDate();
+  const {day, month, year, hour} = generateDate();
   const temperatureData = {
     temperature,
-    createdAt
+    day,
+    month,
+    year,
+    hour
   }
   await temperaturesRepository.save(temperatureData);
 }
 
 async function getTodays() {
-  const today = generateDate().split(",")[0];
+  const today = generateDate().day;
   const temperatures = await temperaturesRepository.getTodays(today);
   return temperatures;
 }
