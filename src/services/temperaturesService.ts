@@ -19,11 +19,12 @@ async function create(body: RequestBodyDefault) {
 async function getTodays() {
   const today = generateDate().day;
   const temperatures = await temperaturesRepository.getTodays(today);
+  const {_avg} = temperatures;
   return temperatures;
 }
 
-async function getMonthTemperatures(month: string) {
-  const temperatures = await temperaturesRepository.getMonthTemperatures(month);
+async function getMonthTemperatures(month: string, year: string) {
+  const temperatures = await temperaturesRepository.getMonthTemperatures(month, year);
   return temperatures;
 }
 

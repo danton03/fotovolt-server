@@ -22,9 +22,10 @@ async function getMonthTemperatures(req: FastifyRequestType, reply: FastifyReply
     const monthValidated = monthSchema.parse(req.query).month;
     month = monthValidated < 10 ? `0${monthValidated}` : String(monthValidated);  
   } else {
-    month = generateDate().slice(3,5);
+    month = generateDate().month;
   }
-  const temperatures = await temperaturesService.getMonthTemperatures(month);
+  const year = generateDate().year;
+  const temperatures = await temperaturesService.getMonthTemperatures(month, year);
   reply.status(200).send(temperatures);
 }
 

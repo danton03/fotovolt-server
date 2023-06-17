@@ -10,19 +10,34 @@ async function save(temperatureData: TtemperatureData) {
 }
 
 async function getTodays(date: string) {
-  const temperatures = await prisma.temperatures.findMany({
+  const temperatures = await prisma.temperatures.groupBy({
+    by: ["hour", "day"],  
     where: {
-      day: date
+      day: date,
+    },
+    _avg: {
+      temperature: true,
+    },
+    orderBy: {
+      day: 'asc'
     }
   })
 
   return temperatures;
 }
 
-async function getMonthTemperatures(month: string) {
-  const temperatures = await prisma.temperatures.findMany({
+async function getMonthTemperatures(month: string, year: string) {
+  const temperatures = await prisma.temperatures.groupBy({
+    by: ["day"],  
     where: {
-      month: month
+      month,
+      year
+    },
+    _avg: {
+      temperature: true,
+    },
+    orderBy: {
+      day: 'asc'
     }
   })
 
