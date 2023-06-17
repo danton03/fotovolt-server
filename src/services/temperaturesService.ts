@@ -19,7 +19,6 @@ async function create(body: RequestBodyDefault) {
 async function getTodays() {
   const today = generateDate().day;
   const temperatures = await temperaturesRepository.getTodays(today);
-  const {_avg} = temperatures;
   return temperatures;
 }
 
