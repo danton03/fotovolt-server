@@ -4,7 +4,7 @@ import cors from "@fastify/cors";
 import { temperatureRoutes } from "./routes/temperaturesRoute";
 
 const PORT: number = Number(process.env.PORT) || 3000;
-const HOST: string = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
+const HOST: string = ("RENDER" in process.env) ? `0.0.0.0` : `http://localhost`;
 
 const app = fastify();
 
@@ -17,7 +17,7 @@ app.register(temperatureRoutes);
 app.listen({host: HOST, port: PORT })
 .then(() => {
   // eslint-disable-next-line no-console
-  console.log(`🚀 Server rodando em http://localhost:${PORT}`);
+  console.log(`🚀 Server rodando em ${HOST}:${PORT}`);
 })
 .catch((err) => {
   app.log.error(err)
