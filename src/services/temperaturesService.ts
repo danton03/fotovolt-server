@@ -2,18 +2,26 @@ import { RequestBodyDefault } from "fastify";
 import { temperatureSchema } from "../schemas/temperatureSchema";
 import { temperaturesRepository } from "../repositories/temperaturesRepository";
 import { generateDate } from "../utils/dateGenerator";
+import { z } from "zod";
 
 async function create(body: RequestBodyDefault) {
-  const {temperature} = temperatureSchema.parse(body);
-  const {day, month, year, hour} = generateDate();
-  const temperatureData = {
-    temperature,
-    day,
-    month,
-    year,
-    hour
+  console.log(body);
+  try {
+    const {temperature} = temperatureSchema.parse(body);
+    const {day, month, year, hour} = generateDate();
+    const temperatureData = {
+      temperature,
+      day,
+      month,
+      year,
+      hour
+    }
+    await temperaturesRepository.save(temperatureData);
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      console.log(err.issues);
+    }
   }
-  await temperaturesRepository.save(temperatureData);
 }
 
 async function getTodays() {

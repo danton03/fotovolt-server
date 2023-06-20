@@ -4,7 +4,7 @@ import cors from "@fastify/cors";
 import { temperatureRoutes } from "./routes/temperaturesRoute";
 
 const PORT: number = Number(process.env.PORT) || 3000;
-const HOST: string = ("RENDER" in process.env) ? `0.0.0.0` : `http://localhost`;
+const HOST: string = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
 
 const app = fastify();
 
