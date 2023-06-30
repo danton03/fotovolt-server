@@ -1,6 +1,0 @@
--- CreateTable
-CREATE TABLE "Temperatures" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "temperature" REAL NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
